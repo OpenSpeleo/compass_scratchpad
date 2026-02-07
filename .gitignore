@@ -174,5 +174,8 @@ cython_debug/
 tests/artifacts/private/*.dat
 tests/artifacts/private/*.mak
 tests/artifacts/private/*.kml
+tests/artifacts/private/*.plt
 tests/artifacts/private/*.geojson
 tests/artifacts/private/*.json
+
+pytool_compass_lib_old

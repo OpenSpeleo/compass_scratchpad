@@ -220,14 +220,16 @@ class TestBaselineConsistency:
     def test_dat_to_json_matches_baseline(self, dat_path, json_baseline):
         """Test DAT to JSON conversion matches stored baseline."""
         # Read the DAT file
-        trips = read_dat_file(dat_path)
+        surveys = read_dat_file(dat_path)
 
         # Serialize to JSON using Pydantic
-        dat_file_obj = CompassDatFile(trips=trips)
+        dat_file_obj = CompassDatFile(surveys=surveys)
         result = {
             "version": "1.0",
             "format": FormatIdentifier.COMPASS_DAT.value,
-            "trips": json.loads(dat_file_obj.model_dump_json(by_alias=True))["trips"],
+            "surveys": json.loads(dat_file_obj.model_dump_json(by_alias=True))[
+                "surveys"
+            ],
         }
 
         # Load baseline
@@ -437,7 +439,7 @@ class TestProjectLoading:
             if file_dir.data:
                 loaded_count += 1
                 # Verify data structure
-                assert len(file_dir.data.trips) >= 0
+                assert len(file_dir.data.surveys) >= 0
 
         # At least some files should have been loaded
         assert file_count > 0, "No file directives found"
